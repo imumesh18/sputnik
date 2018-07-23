@@ -1,0 +1,27 @@
+engines:
+  rubocop:
+    enabled: true
+    channel: rubocop-0-54
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    exclude_paths:
+      - "spec/"
+    config:
+      languages:
+        ruby:
+          mass_threshold: 30
+
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.erb"
+  - "**.rb"
+  - "**.css"
+
+exclude_paths:
+  - .circleci/
+  - config/
+  - db/
+  - vendor/
