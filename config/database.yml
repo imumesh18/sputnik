@@ -22,6 +22,6 @@ production:
   <<: *default
   url: <%= ENV['DATABASE_URI'] %>
   pool: 15
-  database: <%= ENV['SPUTNIK_TEST_DATABASE_NAME'] %>
+  database: <%= ENV['SPUTNIK_PROD_DATABASE_NAME'] %>
   username: <%= ENV['SPUTNIK_DATABASE_USERNAME'] %>
   password: <%= ENV['SPUTNIK_DATABASE_PASSWORD'] %>
