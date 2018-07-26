@@ -3,16 +3,14 @@ default: &default
   encoding: unicode
 
 development:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: <%= ENV['SPUTNIK_DEVELOPMENT_DATABASE_NAME'] %>
   pool: 5
   username: <%= ENV['SPUTNIK_DATABASE_USERNAME'] %>
   password: <%= ENV['SPUTNIK_DATABASE_PASSWORD'] %>
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: <%= ENV['SPUTNIK_TEST_DATABASE_NAME'] %>
   pool: 5
   username: <%= ENV['SPUTNIK_DATABASE_USERNAME'] %>
@@ -20,7 +18,7 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URI'] %>
+  url: <%= ENV['DATABASE_URL'] %>
   pool: 15
   database: <%= ENV['SPUTNIK_PROD_DATABASE_NAME'] %>
   username: <%= ENV['SPUTNIK_DATABASE_USERNAME'] %>

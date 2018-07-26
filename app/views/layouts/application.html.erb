@@ -10,6 +10,27 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+  <div id="container">
+
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "Sputnik", root_path, id: "logo" %>
+        <% if logged_in? %>
+          <%= link_to 'Logout', logout_path %>
+        <% else %>
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li><%= link_to "Log In", login_path %></li>
+            </ul>
+          </nav>
+        <% end %>
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </div>
+</body>
 </html>
