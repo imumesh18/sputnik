@@ -25,8 +25,7 @@ class UsersController < ApplicationController
       if user
         if user.update_attribute('is_verified', true)
           @verification_message = "Verified"
-          render "sessions/login", 
-          # redirect_back fallback_location: {controller: "sessions", action: "login", "page_msg": @verification_message}
+          redirect_back fallback_location: {controller: "sessions", action: "login", "page_msg": @verification_message}
         else
           @verification_message = "Not Verified - Something went wrong"
         end
@@ -47,6 +46,5 @@ class UsersController < ApplicationController
         end
         return token
       end
->>>>>>> Stashed changes
 end
   
