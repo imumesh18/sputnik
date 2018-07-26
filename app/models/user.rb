@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :password, :confirmation => true, :format => PASSWORD_REGEX 
 
   def self.authenticate(login_email="", login_password="")
-
     user = User.find_by_email(login_email)
     if user && user.match_password(login_password)
       return user
@@ -23,7 +22,6 @@ class User < ApplicationRecord
 
   def encrypt_password
     unless password.blank?
-      p password
       self.salt = BCrypt::Engine.generate_salt
       self.encrypted_password = BCrypt::Engine.hash_secret(password, salt)
     end

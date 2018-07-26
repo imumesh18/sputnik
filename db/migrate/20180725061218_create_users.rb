@@ -4,6 +4,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :encrypted_password 
       t.string :salt
+      t.string :token
+      t.boolean :is_verified
       t.timestamps
     end
   end
