@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    before_action :save_login_state, :only => [:signup, :create]
     def signup
       @user = User.new
     end
@@ -21,5 +20,5 @@ class UsersController < ApplicationController
     def allowed_params
         params.require(:user).permit(:email, :password, :password_confirmation)
     end      
-  end
+end
   
