@@ -10,15 +10,7 @@
   </head>
 
   <body>
-    <div class="topnav">
-
-      <%= link_to "Sputnik", root_path %>
-      <div class="topnav-right">
-        <%= link_to "Sign Up", signup_path %>
-        <%= link_to "Log In", login_path %>
-      </div>
-    </div>
-    
+    <%= render 'layouts/navbar' %>
     <div class="container">
       <br>
       <%= render 'layouts/error' %>

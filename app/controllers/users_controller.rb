@@ -25,7 +25,7 @@ class UsersController < ApplicationController
         if user.update_attribute('is_verified', true)
           flash[:success] = "Verified"
           flash[:color]= "valid"
-          redirect_back fallback_location: {controller: "sessions", action: "login"}
+          redirect_to login_url
         else
           @verification_message = "Not Verified - Something went wrong"
         end
