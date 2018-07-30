@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       if @user.save
         flash[:success] = "You signed up successfully"
         flash[:color]= "valid"
-        SignUpMailer.user_confirmation(@user).deliver_now
+        SignUpMailer.user_confirmation(@user).deliver_later
       else
         flash[:alert] = "Form is invalid"
         flash[:color]= "invalid"
