@@ -26,3 +26,6 @@ coverage
 
 # Ignore DS_STORE
 *.DS_Store
+
+# Ignore env variable file.
+.env

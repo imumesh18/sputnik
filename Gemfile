@@ -20,6 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'newrelic_rpm'
 
+# Use sidekiq as job queue.
+gem 'sidekiq'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
