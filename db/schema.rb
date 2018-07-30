@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2018_07_25_061218) do
     t.string "encrypted_password"
     t.string "salt"
     t.string "token"
-    t.boolean "is_verified"
+    t.boolean "is_verified", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -4,34 +4,32 @@
     <title>Sputnik</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  <div id="page_msg"><%= params['page_msg'] %></div>
-  <div id="container">
+    <div class="topnav">
 
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <%= link_to "Sputnik", root_path, id: "logo" %>
-        <% if logged_in? %>
-          <%= link_to 'Logout', logout_path %>
-        <% else %>
-          <nav>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Home", root_path %></li>
-              <li><%= link_to "Sign Up", signup_path %></li>
-              <li><%= link_to "Log In", login_path %></li>
-            </ul>
-          </nav>
-        <% end %>
+      <%= link_to "Sputnik", root_path %>
+      <div class="topnav-right">
+        <%= link_to "Sign Up", signup_path %>
+        <%= link_to "Log In", login_path %>
       </div>
-    </header>
+    </div>
+    <br>
+    
+    <% if flash[:success] %>
+      <div class="alert alert-success"> <%= flash[:success] %> </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="alert alert-info"> <%= flash[:notice] %> </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"> <%= flash[:alert] %> </div>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>
-  </div>
 </body>
 </html>

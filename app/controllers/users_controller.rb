@@ -7,13 +7,12 @@ class UsersController < ApplicationController
     def create
       @user = User.new(allowed_params)
       @user.token = generate_token
-      @user.is_verified = false
       if @user.save
-        flash[:notice] = "You signed up successfully"
+        flash[:success] = "You signed up successfully"
         flash[:color]= "valid"
         SignUpMailer.user_confirmation(@user).deliver_now
       else
-        flash[:notice] = "Form is invalid"
+        flash[:alert] = "Form is invalid"
         flash[:color]= "invalid"
       end
       render :signup
@@ -24,8 +23,9 @@ class UsersController < ApplicationController
       user = User.find_by(token: token)
       if user
         if user.update_attribute('is_verified', true)
-          @verification_message = "Verified"
-          redirect_back fallback_location: {controller: "sessions", action: "login", "page_msg": @verification_message}
+          flash[:success] = "Verified"
+          flash[:color]= "valid"
+          redirect_back fallback_location: {controller: "sessions", action: "login"}
         else
           @verification_message = "Not Verified - Something went wrong"
         end
