@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         flash[:alert] = "Form is invalid"
         flash[:color]= "invalid"
       end
-      render :signup
+      redirect_to signup_url
     end
 
     def verify

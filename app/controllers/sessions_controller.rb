@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     else
       flash[:notice] = "Invalid Email or Password"
       flash[:color]= "invalid"
-      render :login
+      redirect_to login_url
     end
   end
   
