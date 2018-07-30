@@ -15,6 +15,7 @@ module Sputnik
 
     Raven.configure do |config|
       config.dsn = ENV['SENTRY_DSN']
+      config.environments = ['development', 'production', 'test']
     end
   end
 end
