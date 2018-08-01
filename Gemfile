@@ -20,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'newrelic_rpm'
 
+gem 'seed_migration'
+
 # Use sidekiq as job queue.
 gem 'sidekiq'
 
