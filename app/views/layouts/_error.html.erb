@@ -1,10 +1,21 @@
 <% if flash[:success] %>
-  <div class="alert alert-success"> <%= flash[:success] %> </div>
+  <% success_messages = flash[:success].split("\n") 
+  	success_messages.each do |message| %> 
+  	<div class="alert alert-success"> <%= message %> </div>
+  <% end %>
 <% end %>
+
 <% if flash[:notice] %>
-  <div class="alert alert-info"> <%= flash[:notice] %> </div>
+	<% notices = flash[:notice].split("\n")
+	notices.each do |notice| %>
+  		<div class="alert alert-info"> <%= notice %> </div>
+  	<% end %>
 <% end %>
+
 <% if flash[:alert] %>
-  <div class="alert alert-danger"> <%= flash[:alert] %> </div>
+	<% alerts = flash[:alert].split("\n")
+	alerts.each do |alert| %>
+		<div class="alert alert-danger"> <%= alert  %> </div>
+	<% end %>
 <% end %>
 <% flash.clear %>

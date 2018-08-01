@@ -6,12 +6,8 @@ class SessionsController < ApplicationController
   def login
   end
   
-  def profile
-  end
-
   def create
     authorized_user = User.authenticate(params[:login_email],params[:login_password])
-    p authorized_user
     if authorized_user
       session[:user_id] = authorized_user.id
       redirect_to profile_url, notice: 'Logged in!'
@@ -25,5 +21,5 @@ class SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to root_url, notice: 'Logged out!'
-  end
+  end  
 end

@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         @verification_message = "Wrong Token"
       end
     end
-  
+
     private
       def allowed_params
           params.require(:user).permit(:email, :password, :password_confirmation)

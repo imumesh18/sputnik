@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#signup', as: 'signup'
   get 'login', to: 'sessions#login', as: 'login'
   get 'logout', to: 'sessions#logout', as: 'logout'
-  get 'profile', to: 'sessions#profile', as: 'profile'
+  get 'profile', to: 'user_profile#index', as: 'profile'
   get 'users/verify/:token', to: 'users#verify'
+  post 'profile/basic_info', to: 'user_profile#basic_info', as: 'basic_info'
   resources :users, :sessions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
