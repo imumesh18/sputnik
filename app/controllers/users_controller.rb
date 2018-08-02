@@ -12,8 +12,7 @@ class UsersController < ApplicationController
         flash[:color]= "valid"
         SignUpMailer.user_confirmation(@user).deliver_later
       else
-        flash[:alert] = "Form is invalid"
-        flash[:color]= "invalid"
+        display_errors
       end
       redirect_to signup_url
     end
@@ -45,6 +44,16 @@ class UsersController < ApplicationController
           return generate_token
         end
         return token
+      end
+
+      def display_errors
+        if @user.errors.any?
+          errors = []
+          @user.errors.full_messages.each do |message|
+            errors<< message
+          end
+          flash[:alert] = errors.join("\n")
+        end
       end
 end
   

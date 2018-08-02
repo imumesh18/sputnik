@@ -17,7 +17,3 @@
 // = require jquery3
 // = require bootstrap
 // = require_tree .
-
-function check_password(){
-	alert('check')
-}
