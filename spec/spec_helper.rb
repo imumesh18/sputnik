@@ -10,6 +10,7 @@ SimpleCov.start do
   add_group 'Helpers', 'app/helpers'
   add_group 'Mailers', 'app/mailers'
 end
+SimpleCov.refuse_coverage_drop
 # This outputs the report to your public folder
 SimpleCov.coverage_dir 'coverage'
 
