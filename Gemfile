@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rubocop-rspec', '<= 1.25'
   gem 'simplecov', '<= 0.14'
   gem 'simplecov-console', '<= 0.4'
+  gem 'cane'
 end
 
 group :development do

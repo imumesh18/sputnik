@@ -4,8 +4,8 @@ defaults: &defaults
   docker:
     - image: circleci/ruby:2.5.1-stretch-node-browsers
       environment:
-        BUNDLE_JOBS: 4
-        BUNDLE_RETRY: 3
+        BUNDLE_JOBS: "4"
+        BUNDLE_RETRY: "3"
         BUNDLE_PATH: vendor/bundle
         PGHOST: 127.0.0.1
         PGUSER: sputnik
@@ -56,13 +56,16 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:migrate
+            bundle exec rake db:create db:migrate seed:migrate
       - run:
           name: Run rspec tests
           command: |
             bundle exec rake
             ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.json coverage/.resultset.json
+      - run:
+          name: Test code quality
+          command: |
+            rake quality
       - persist_to_workspace:
           root: tmp
           paths: 
@@ -87,7 +90,7 @@ jobs:
           name: Deploy Master to Heroku
           command: | 
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-            heroku run "HEROKU_EMAIL=$HEROKU_EMAIL HEROKU_API_KEY=$HEROKU_API_KEY rake db:migrate" -a $HEROKU_APP_NAME
+            heroku run "HEROKU_EMAIL=$HEROKU_EMAIL HEROKU_API_KEY=$HEROKU_API_KEY rake db:migrate seed:migrate" -a $HEROKU_APP_NAME
 
 workflows:
   version: 2

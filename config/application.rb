@@ -15,7 +15,7 @@ module Sputnik
     config.active_job.queue_adapter = :sidekiq
     Raven.configure do |config|
       config.dsn = ENV['SENTRY_DSN']
-      config.environments = ['development', 'production', 'test']
+      config.environments = ['production']
       config.excluded_exceptions = []
     end
   end
