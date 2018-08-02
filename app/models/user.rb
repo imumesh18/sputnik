@@ -9,12 +9,13 @@ class User < ApplicationRecord
 
   def self.authenticate(login_email="", login_password="")
     user = User.find_by_email(login_email)
-    if user && user.match_password(login_password)
+    if user && user.match_password(login_password) && user.email_verified?
       return user
     else
       return false
     end
   end   
+  
 
   def match_password(login_password="")
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
@@ -25,6 +26,10 @@ class User < ApplicationRecord
       self.salt = BCrypt::Engine.generate_salt
       self.encrypted_password = BCrypt::Engine.hash_secret(password, salt)
     end
+  end
+
+  def email_verified?
+    is_verified
   end
 
   def clear_password

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = authorized_user.id
       redirect_to user_profile_path(session[:user_id]), notice: 'Logged in!'
     else
-      flash[:notice] = "Invalid Email or Password"
+      flash[:notice] = "Invalid Email or Password or Email not Verified"
       flash[:color]= "invalid"
       redirect_to login_url
     end

@@ -1,0 +1,13 @@
+<%= form_for @user_info, url: {action: "driving_license_submit"},multipart: true do |f| %>
+	<div class="field">
+		<%= f.label :driving_license %><br>
+	 	<%= f.file_field :driving_license %>
+	</div><br>
+	<div class="actions"><%= f.submit "Submit" %></div>
+<% end %>
+
+
+<% if @user_info.driving_license? %>
+	<h3>Your Submitted Image</h3>
+	<%= image_tag(@user_info.driving_license.url) %>
+<% end %>

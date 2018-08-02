@@ -3,4 +3,5 @@ class UserInfo < ApplicationRecord
 	validates :gender, :presence => true
 	validates :mobile, :presence => true
 	validates :dob, :presence => true
+	mount_uploader :driving_license, DrivingLicenseUploader
 end
