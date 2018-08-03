@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         flash[:color]= "valid"
         SignUpMailer.user_confirmation(@user).deliver_later
       else
-        display_errors
+        flash[:alert] = "Email Taken - User already exist with this email-id."
       end
       redirect_to signup_url
     end
