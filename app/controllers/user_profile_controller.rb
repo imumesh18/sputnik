@@ -1,14 +1,11 @@
 class UserProfileController < ApplicationController
-	before_action :seed_cities, :set_user_info, :check_id, 
+		before_action :seed_cities, :set_user_info, :check_id
+		before_action :check_application_status, :except => [:show]
     @@possible_status_string = {:not_applied => "Not Applied", :applied =>  "Applied", :accepted => "Rejected", :rejected => "Accepted"}
   	
   	def show
-        if check_id(params[:id])
-        	@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
         	@display_profile = :home
-        else
-        	redirect_to user_profile_path(session[:user_id])
-        end
+        	render "show"
     end
 
   	def basic_details
@@ -46,13 +43,11 @@ class UserProfileController < ApplicationController
 		end
 		
 		def vehicle_registration_card
-			@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
     	@display_profile = :vehicle_registration_card
     	render "show"
 		end
 
 		def vehicle_registration_card_submit
-    	@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
     	@user_info.update(allowed_params_vehicle_registration_card)
     	if @user_info.save
     		flash[:success] = "Vehicle Registration Card Submitted"
@@ -64,15 +59,19 @@ class UserProfileController < ApplicationController
     	end
 		end
 
+		def application_preview
+    	@display_profile = :application_preview
+    	render "show"
+		end
+
     def apply
-        @user_info= UserInfo.find_or_create_by(email: get_email_from_session_id)
         @user_info.status=  @@possible_status_string[:applied]
         if @user_info.save
           flash[:success] = "Application Submitted"
           redirect_to user_profile_path(session[:user_id])
         else
             display_errors
-            redirect_to driving_license_path(session[:user_id])
+            redirect_to application_preview_path(session[:user_id])
         end
     end
 
@@ -126,5 +125,15 @@ class UserProfileController < ApplicationController
 	    	if params[:id] != session[:user_id].to_s
 	    		redirect_to user_profile_path(session[:user_id])
 	    	end
-	    end
+			end
+			
+			def check_application_status
+				if @user_info.status == "Applied"
+					flash[:notice]="Application Submitted - It is under review"
+					redirect_to user_profile_path(session[:user_id])
+				elsif @user_info.status == "Accepted"
+					flash[:notice]="Application Accepted - Welcome to Go-jek "
+					redirect_to user_profile_path(session[:user_id])
+				end
+			end
 end
