@@ -1,11 +1,8 @@
 class UserProfileController < ApplicationController
-	before_action :seed_cities, :set_user_info
+	before_action :seed_cities, :set_user_info, :check_id, 
 	def show
-	  if check_id(params[:id])
-      	@display_profile = :home
-      else
-      	redirect_to user_profile_path(session[:user_id])
-      end
+    	@display_profile = :home
+      	render "show"
   	end
 
   	def basic_details
@@ -105,7 +102,9 @@ class UserProfileController < ApplicationController
 	      end
 	    end
 
-	    def check_id(id)
-	    	id === session[:user_id].to_s
+	    def check_id
+	    	if params[:id] != session[:user_id].to_s
+	    		redirect_to user_profile_path(session[:user_id])
+	    	end
 	    end
 end
