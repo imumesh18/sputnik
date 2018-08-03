@@ -1,0 +1,12 @@
+<%= form_for @user_info, url: {action: "vehicle_registration_card_submit"},multipart: true do |f| %>
+	<div class="field">
+		<%= f.label :vehicle_registration_card %><br>
+	 	<%= f.file_field :vehicle_registration_card %>
+	</div><br>
+	<div class="actions"><%= f.submit "Submit" %></div>
+<% end %>
+
+<% if @user_info.vehicle_registration_card? %>
+	<h3>Your Submitted Vehicle RC</h3>
+	<%= image_tag(@user_info.vehicle_registration_card.url) %>
+<% end %>

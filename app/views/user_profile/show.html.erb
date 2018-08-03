@@ -10,11 +10,16 @@
 	<%= render "driving_license_form" %>
 <% end %>
 
+<% content_for :vehicle_registration_card do %>
+	<%= render "vehicle_registration_card_form" %>
+<% end %>
+
 <div class="row" >
   <div class="col-md-2" >
       <%= link_to "Home", user_profile_path(session[:user_id]), class:"btn btn-primary btn-lg", :id=> "home" %><br><br>
       <%= link_to "Basic Details", basic_details_path(session[:user_id]), class:"btn btn-primary btn-lg", :id=> "basic_details" %><br><br>
       <%= link_to "Driving License", driving_license_path(session[:user_id]), class:"btn btn-primary btn-lg", :id=> "driving_license" %><br><br>
+      <%= link_to "Vehicle Registration Card", vehicle_registration_card_path(session[:user_id]), class:"btn btn-primary btn-lg", :id=> "vehicle_registration_card" %><br><br>
   </div>
   <div class="col-md-10">
     <div id="content">
