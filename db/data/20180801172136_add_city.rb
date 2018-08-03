@@ -8,7 +8,6 @@ class AddCity < SeedMigration::Migration
       [ "Bekasi", true],
       [ "Semarang", true]
     ]
-
     city_list.each do |name, is_enable|
       City.create( :name => name, :is_enabled => is_enable )
     end

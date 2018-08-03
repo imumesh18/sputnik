@@ -1,7 +1,7 @@
 class UserProfileController < ApplicationController
+	before_action :seed_cities, :set_user_info
 	def show
 	  if check_id(params[:id])
-      	@user_info = UserInfo.new
       	@display_profile = :home
       else
       	redirect_to user_profile_path(session[:user_id])
@@ -9,31 +9,29 @@ class UserProfileController < ApplicationController
   	end
 
   	def basic_details
-  		@user_info = UserInfo.new
   		@display_profile = :basic_details
   		render "show"
   	end
   	
     def basic_details_submit
-      @user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
       @user_info.update(allowed_params_basic_details)
-      if @user_info.save
+      if not check_all_fields_basic_details_field(@user_info)
+      	flash[:alert] = "Enter All Fields in the form"
+      elsif @user_info.save
       	flash[:success] = "Basic Details Submitted"
-      	redirect_to driving_license_path(session[:user_id])
+      	return redirect_to driving_license_path(session[:user_id])
       else
       	display_errors
-      	redirect_to basic_details_path(session[:user_id])
       end
+      redirect_to basic_details_path(session[:user_id])
     end
 
     def driving_license
-    	@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
     	@display_profile = :driving_license
     	render "show"
     end
 
     def driving_license_submit
-    	@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
     	@user_info.update(allowed_params_driving_license)
     	if @user_info.save
     		flash[:success] = "Driving License Submitted"
@@ -46,13 +44,29 @@ class UserProfileController < ApplicationController
     end
 
     private
+    	def seed_cities
+    		@cities = City.where(:is_enable == true)
+    		@cities_names = []
+    		@cities.each do |city|
+    			@cities_names.push(city['name'])
+    		end
+    	end
+
+    	def set_user_info
+    		@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
+    	end
+
 	    def allowed_params_basic_details
-	      params.require(:user_info).permit(:full_name, :gender, :mobile, :dob) 
+	      params.require(:user_info).permit(:full_name, :gender, :mobile, :dob, :city) 
 	    end
 
 	    def allowed_params_driving_license
 	      params.require(:user_info).permit(:driving_license) 
 	    end
+
+	    def check_all_fields_basic_details_field(user_info)
+	    	user_info['full_name'] != "" and user_info['dob'] != nil and user_info['mobile'] != nil and user_info['gender'] != "" and user_info['city'] != ""
+	    end	
 
 	    def get_email_from_session_id
 	      user = User.find(session[:user_id])
