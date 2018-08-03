@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         flash[:color]= "valid"
         SignUpMailer.user_confirmation(@user).deliver_later
       else
-        display_errors
+        flash[:alert] = "Email Taken - User already exist with this email-id."
       end
       redirect_to signup_url
     end
@@ -21,12 +21,17 @@ class UsersController < ApplicationController
       token = params[:token]
       user = User.find_by(token: token)
       if user
-        if user.update_attribute('is_verified', true)
-          flash[:success] = "Verified"
-          flash[:color]= "valid"
-          redirect_to login_url
+        if !user.is_verified
+          if user.update_attribute('is_verified', true) && user.update_attribute('token', nil)
+            flash[:success] = "Verified"
+            flash[:color]= "valid"
+            redirect_to login_url
+          else
+            @verification_message = "Not Verified - Something went wrong"
+          end
         else
-          @verification_message = "Not Verified - Something went wrong"
+          flash[:alert] = "Token Expired - User already verified"
+          redirect_to login_url
         end
       else
         @verification_message = "Wrong Token"
