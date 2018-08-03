@@ -1,9 +1,15 @@
 class UserProfileController < ApplicationController
 	before_action :seed_cities, :set_user_info, :check_id, 
-	def show
-    	@display_profile = :home
-      	render "show"
-  	end
+    @@possible_status_string = {:not_applied => "Not Applied", :applied =>  "Applied", :accepted => "Rejected", :rejected => "Accepted"}
+  	
+  	def show
+        if check_id(params[:id])
+        	@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
+        	@display_profile = :home
+        else
+        	redirect_to user_profile_path(session[:user_id])
+        end
+    end
 
   	def basic_details
   		@display_profile = :basic_details
@@ -58,6 +64,18 @@ class UserProfileController < ApplicationController
     	end
 		end
 
+    def apply
+        @user_info= UserInfo.find_or_create_by(email: get_email_from_session_id)
+        @user_info.status=  @@possible_status_string[:applied]
+        if @user_info.save
+          flash[:success] = "Application Submitted"
+          redirect_to user_profile_path(session[:user_id])
+        else
+            display_errors
+            redirect_to driving_license_path(session[:user_id])
+        end
+    end
+
     private
     	def seed_cities
     		@cities = City.where(:is_enable == true)
@@ -66,6 +84,8 @@ class UserProfileController < ApplicationController
     			@cities_names.push(city['name'])
     		end
     	end
+
+
 
     	def set_user_info
     		@user_info = UserInfo.find_or_create_by(email: get_email_from_session_id)
