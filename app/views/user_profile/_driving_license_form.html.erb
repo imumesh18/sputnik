@@ -9,5 +9,5 @@
 
 <% if @user_info.driving_license? %>
 	<h3>Your Submitted Image</h3>
-	<%= image_tag(@user_info.driving_license.url) %>
+	<center><iframe src=<%= @user_info.driving_license.url %> width="500" height="500" style="border: none;"> </iframe></center>
 <% end %>

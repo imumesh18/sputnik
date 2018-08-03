@@ -8,5 +8,5 @@
 
 <% if @user_info.vehicle_registration_card? %>
 	<h3>Your Submitted Vehicle RC</h3>
-	<%= image_tag(@user_info.vehicle_registration_card.url) %>
+	<center><iframe src=<%= @user_info.vehicle_registration_card.url %> width="500" height="500" style="border: none;"> </iframe></center>
 <% end %>
