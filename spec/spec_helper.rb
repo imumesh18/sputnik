@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'factory_bot'
 SimpleCov.start do
   add_filter '/test/'
   add_filter '/config/'
@@ -38,6 +39,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  RSpec.configure do |config|
+    config.include FactoryBot::Syntax::Methods
+  end
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be
@@ -87,7 +91,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = :random
-
+  
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value
