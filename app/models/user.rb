@@ -5,7 +5,7 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i
   PASSWORD_REGEX = /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,30}\z/
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
-  validates :password, :confirmation => true, :format => PASSWORD_REGEX 
+  validates :password, :presence => true, :confirmation => true, :format => PASSWORD_REGEX 
 
   def self.authenticate(login_email="", login_password="")
     user = User.find_by_email(login_email)
