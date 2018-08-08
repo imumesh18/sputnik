@@ -15,6 +15,8 @@ RSpec.describe UsersController, type: :controller do
             expect(User.count).to eq(1)
             expect(response).to redirect_to(signup_url)
         end
+    end
+    describe "for verify" do
         it 'should verify token' do
             user_signup_data=File.read("./data/signup_data.json")
             user_signup_data=JSON.parse(user_signup_data)
@@ -28,7 +30,7 @@ RSpec.describe UsersController, type: :controller do
             expect(user.is_verified).to be_equal(true)
             expect(response).to redirect_to(login_url)
         end
-        it 'should alert for ' do
+        it 'should not verify token' do
             user_signup_data=File.read("./data/signup_data.json")
             user_signup_data=JSON.parse(user_signup_data)
             user = {
