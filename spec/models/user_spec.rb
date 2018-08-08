@@ -56,9 +56,4 @@ RSpec.describe User, type: :model do
   	end
   end
 
-  describe "#authenticate" do
-  	subject.save
-  	p subject.authenticate("abhinav@gmail.com","A12345")
-  end
-
 end
