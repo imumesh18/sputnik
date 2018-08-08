@@ -3,7 +3,6 @@ require 'factories/user'
 require 'json'
 
 RSpec.describe UsersController, type: :controller do
-
     describe "for signup" do
         it 'should create a new user' do
             user_signup_data=File.read("./data/signup_data.json")
@@ -16,6 +15,7 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to redirect_to(signup_url)
         end
     end
+    
     describe "for verify" do
         it 'should verify token' do
             user_signup_data=File.read("./data/signup_data.json")

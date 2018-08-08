@@ -1,5 +1,6 @@
 class AdminSessionController < ApplicationController
 	def login
+		save_admin_login_state
 	end
 
 	def create
@@ -24,9 +25,10 @@ class AdminSessionController < ApplicationController
 	  end
 	end
 
+	# So that when already login admin cannot see login page 
 	def save_admin_login_state
 	  if session[:admin_id]
-	          redirect_to admin_path(session[:session_id]), notice: 'Already Logged in!'
+	          redirect_to admin_home_path(session[:admin_id]), notice: 'Already Logged in!'
 	    return false
 	  else
 	    return true

@@ -2,10 +2,10 @@ class UserProfileController < ApplicationController
 		before_action :seed_cities, :authenticate_user, :set_user_info, :check_id
 		before_action :check_application_status, :except => [:show]
     @@possible_status_string = {:not_applied => "Not Applied", :applied =>  "Applied", :accepted => "Rejected", :rejected => "Accepted"}
-  	
+
   	def show
-        	@display_profile = :home
-        	render "show"
+    	@display_profile = :home
+    	render "show"
     end
 
   	def basic_details
@@ -40,7 +40,7 @@ class UserProfileController < ApplicationController
       		display_errors
       		redirect_to driving_license_path(session[:user_id])
     	end
-		end
+    end
 		
 		def vehicle_registration_card
     	@display_profile = :vehicle_registration_card

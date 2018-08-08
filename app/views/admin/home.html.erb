@@ -1,2 +1,12 @@
-<h1>Admin#home</h1>
-<p>Find me in app/views/admin/home.html.erb</p>
+<center><h1>Applications</h1></center>
+<% @application_info.each do |application| %>
+<div class="card">
+  <div class="card-body">
+    <ul style="list-style-type: none;">
+    	<li><%= application.full_name %></li>
+    	<li><%= application.city %></li>
+    	<li><%= application.email %> </li>
+    </ul>
+  </div>
+</div>
+<% end %>

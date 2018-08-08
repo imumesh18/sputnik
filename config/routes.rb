@@ -14,9 +14,10 @@ Rails.application.routes.draw do
   patch 'user_profile/:id/vehicle_registration_card', to:'user_profile#vehicle_registration_card_submit', as: 'vehicle_registration_card_edit'
   post 'user_profile/:id/vehicle_registration_card', to:'user_profile#vehicle_registration_card_submit', as: 'vehicle_registration_card_submit'
   post 'user_profile/:id/apply', to:'user_profile#apply', as: 'apply'
+  patch 'user_profile/:id/apply', to:'user_profile#apply', as: 'apply_edit'
   get 'user_profile/:id/application_preview', to:'user_profile#application_preview', as: 'application_preview'
 
-  get 'admin/:id', to: 'admin#home', as: 'admin_home'
+  get 'admin/:id/home', to: 'admin#home', as: 'admin_home'
   get 'admin_login', to: 'admin_session#login', as: 'admin_login'
 
   resources :users, :sessions, :user_profile, :admin_session, :admin
