@@ -15,6 +15,7 @@ defaults: &defaults
         POSTGRES_USER: sputnik
         POSTGRES_DB: sputnik
         POSTGRES_PASSWORD: ""
+    - image: redis:latest
 
 jobs:
   build:
