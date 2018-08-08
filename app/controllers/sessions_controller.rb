@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
-  before_action :authenticate_user, :except => [:index, :login, :create, :logout]
-  before_action :save_login_state, :only => [:index, :login, :create]
+  before_action :authenticate_user, :except => [:login, :create, :logout]
+  before_action :save_login_state, :only => [:login, :create]
 
   def login
   end

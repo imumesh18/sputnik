@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admin/index'
   root 'users#home'
   get 'signup', to: 'users#signup', as: 'signup'
   get 'login', to: 'sessions#login', as: 'login'

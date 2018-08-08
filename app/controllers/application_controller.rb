@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     def authenticate_user
       unless session[:user_id]
         redirect_to(:controller => 'sessions', :action => 'login')
+        flash[:alert] = "Please login first"
         return false
       else
         # set current_user by the current user object
