@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   end
   
   def create
-    authorized_user = User.authenticate(params[:login_email],params[:login_password])
+    authorized_user = authenticate(params[:login_email],params[:login_password])
     if authorized_user
       session[:user_id] = authorized_user.id
       redirect_to user_profile_path(session[:user_id]), notice: 'Logged in!'
@@ -22,4 +22,15 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to root_url, notice: 'Logged out!'
   end  
+
+  private
+
+  def authenticate(login_email="", login_password="")
+    user = User.find_by_email(login_email)
+    if user && user.match_password(login_password) && user.email_verified?
+      return user
+    else
+      return false
+    end
+  end
 end
