@@ -66,7 +66,7 @@ jobs:
       - run:
           name: Test code quality
           command: |
-            rake quality
+            bundle exec rake quality
       - persist_to_workspace:
           root: tmp
           paths: 
