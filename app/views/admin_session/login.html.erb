@@ -1,0 +1,16 @@
+<% @page_title = "Sputnik | Admin Login" %>
+
+<h1>Admin Log In</h1><br>
+<%= form_tag admin_session_index_path do %>
+  <div class="field">
+    <%= label_tag :email %>
+    <%= text_field_tag :login_email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :login_password %>
+  </div> <br>
+  <div class="actions">
+    <%= submit_tag "Log In" %>
+  </div>
+<% end %>

@@ -1,13 +1,15 @@
 <div class="topnav">
   <%= link_to "Sputnik", root_path %>
   <div class="topnav-right">
-  	<% if not session[:user_id] %>
-    	<%= link_to "Sign Up", signup_path %>
- 		<%= link_to "Log In", login_path %>
-	<% else %>
-		<%= link_to "Portal", basic_details_path(session[:user_id]) %>
+  	<% if session[:user_id] %>
+  		<%= link_to "Portal", basic_details_path(session[:user_id]) %>
  		<%= link_to "Log Out", logout_path %>
+ 	<% elsif session[:admin_id] %>
+ 		<%= link_to "Portal", admin_home_path(session[:admin_id]) %>
+ 		<%= link_to "Log Out", logout_path %>
+	<% else %>
+		<%= link_to "User Sign Up", signup_path %>
+ 		<%= link_to "User Log In", login_path %>
 	<% end %>
-    
   </div>
 </div>

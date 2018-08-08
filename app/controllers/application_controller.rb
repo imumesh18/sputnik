@@ -19,15 +19,26 @@ class ApplicationController < ActionController::Base
         return false
       else
         # set current_user by the current user object
-        @current_user = User.find session[:user_id] 
+        @current_user = User.find(session[:user_id])
+        return true
+      end
+    end
+
+    def authenticate_admin
+      unless session[:admin_id]
+        redirect_to(:controller => 'admin_session', :action => 'login')
+        flash[:alert] = "Please login first"
+        return false
+      else
+        @current_user = Admin.find(session[:admin_id]) 
         return true
       end
     end
   
-    #This method for prevent user to access Signup & Login Page without logout
+    #This method is for prevent user to access Signup & Login Page without logout
     def save_login_state
       if session[:user_id]
-              redirect_to(:controller => 'users', :action => 'home')
+              redirect_to user_profile_path(session[:user_id]), notice: 'Already Logged in!'
         return false
       else
         return true
