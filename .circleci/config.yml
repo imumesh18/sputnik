@@ -15,6 +15,7 @@ defaults: &defaults
         POSTGRES_USER: sputnik
         POSTGRES_DB: sputnik
         POSTGRES_PASSWORD: ""
+    - image: redis:latest
 
 jobs:
   build:
@@ -65,7 +66,7 @@ jobs:
       - run:
           name: Test code quality
           command: |
-            rake quality
+            bundle exec rake quality
       - persist_to_workspace:
           root: tmp
           paths: 
