@@ -24,6 +24,15 @@ ActiveRecord::Base.transaction do
 
   City.create({"id"=>6, "is_enabled"=>true, "name"=>"Semarang"})
   ActiveRecord::Base.connection.reset_pk_sequence!('cities')
+
+
+	case Rails.env
+	when "development"
+	  	Admin.create({"email"=>"root@sputnik.com","password"=>"A123456k", "encrypted_password"=>"$2a$10$QypbVSbJ8sZ36TL4Zs7K8esOx8gta8KuC5i9q1r2xOZ8bZ0j2mHo2", "is_verified"=>true, "token"=>nil, "salt"=> "$2a$10$QypbVSbJ8sZ36TL4Zs7K8e"})
+	end
+  
 end
+
+
 
 SeedMigration::Migrator.bootstrap(20180801172136)
