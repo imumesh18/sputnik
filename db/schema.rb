@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_060938) do
+ActiveRecord::Schema.define(version: 2018_08_09_124226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,28 @@ ActiveRecord::Schema.define(version: 2018_08_08_060938) do
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assigned_to"
   end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.boolean "is_enabled"
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.string "email"
+    t.string "full_name"
+    t.string "gender"
+    t.date "dob"
+    t.string "driving_license"
+    t.string "vehicle_registration_card"
+    t.string "reason"
+    t.string "status"
+    t.string "city"
+    t.integer "admin_id"
+    t.bigint "mobile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "seed_migration_data_migrations", id: :serial, force: :cascade do |t|
@@ -48,6 +65,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_060938) do
     t.string "vehicle_registration_card"
     t.string "city"
     t.string "status", default: "Not Applied"
+    t.integer "assigned_to"
   end
 
   create_table "users", force: :cascade do |t|

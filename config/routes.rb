@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'history/index'
   root 'users#home'
   get 'signup', to: 'users#signup', as: 'signup'
   get 'login', to: 'sessions#login', as: 'login'
@@ -17,8 +18,11 @@ Rails.application.routes.draw do
   patch 'user_profile/:id/apply', to:'user_profile#apply', as: 'apply_edit'
   get 'user_profile/:id/application_preview', to:'user_profile#application_preview', as: 'application_preview'
 
+  get '/history/:id/index', to:'history#index', as: 'history_preview'
+  #get '/history/:id/index/view_history', to:'history#index', as: 'history_preview_1'
+
   get 'admin/:id/home', to: 'admin#home', as: 'admin_home'
   get 'admin_login', to: 'admin_session#login', as: 'admin_login'
 
-  resources :users, :sessions, :user_profile, :admin_session, :admin
+  resources :users, :sessions, :user_profile, :admin_session, :admin, :history
 end
