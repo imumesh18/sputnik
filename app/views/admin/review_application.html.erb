@@ -1,0 +1,50 @@
+<table class="table">
+    <tbody>
+      <tr>
+        <td>E-mail</td>
+        <td><%= @application.email %></td>
+      </tr> 
+      <tr>
+        <td>Full Name</td>
+        <td><%= @application.full_name %></td>
+      </tr>  
+      <tr>
+        <td>Gender</td>
+        <td><%= @application.gender %></td>
+      </tr> 
+      <tr>
+        <td>DoB</td>
+        <td><%= @application.dob %></td>
+      </tr> 
+      <tr>
+        <td>Mobile</td>
+        <td><%= @application.mobile %></td>
+      </tr> 
+      <tr>
+        <td>Driving License</td>
+        <td>
+          
+      <% if @application.driving_license? %>
+        <%= image_tag(@application.driving_license.url, size: "300x300") %>
+      <% end %>
+        </td>
+      </tr> 
+      <tr>
+        <td>Vehicle Registration Card</td>
+        <td>
+          
+          <% if @application.vehicle_registration_card? %>
+        <%= image_tag(@application.vehicle_registration_card.url, size: "300x300") %>
+      <% end %>
+        </td>
+      </tr> 
+    </tbody>
+  </table>
+
+
+  <%= form_tag update_status_path(@application.id, session[:admin_id]) do %>
+    <%= label_tag :rejection_reason %>
+    <%= text_area :rejection_reason, :size => "60x12" %><br><br>
+    <%= button_tag 'Reject', type: 'submit', class: 'btn btn-danger', name: 'Reject' %>
+    <%= button_tag 'Accept', type: 'submit', class: 'btn btn-success', name: 'Accept' %>
+  <% end %>
