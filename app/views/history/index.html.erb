@@ -1,41 +1,24 @@
 <center>
 	<h1>History</h1>
 </center>
-Rejected Applications
+Applications
 <br>
-<% @rejected_record.each do |rejected_app| %>
+<% @all_record.each do |application| %>
 	<div class="card">
 	  <div class="card-body">
 	    <ul style="list-style-type: none;">
-	    	<li><%= rejected_app.full_name %></li>
-	    	<li><%= rejected_app.city %></li>
-	    	<li><%= rejected_app.email %> </li>
+	    	<li><%= application.full_name %></li>
+	    	<li><%= application.city %></li>
+	    	<li><%= application.email %> </li>
+	    	<li><%= application.status %> </li>
+	    	<li><%= application.gender %> </li>
 	    </ul>
 	    <center>
-		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewApplicationModal">
+		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewApplicationModal<%=application.id%>">
 		      View
 		    </button>
 		</center>
 	  </div>
 	</div>
-	<%= render "view_history", application: rejected_app %> 
-<% end %>
-Applications 
-<br>
-<% @accepted_record.each do |accepted_app| %>
-	<div class="card">
-	  <div class="card-body">
-	    <ul style="list-style-type: none;">
-	    	<li><%= accepted_app.full_name %></li>
-	    	<li><%= accepted_app.city %></li>
-	    	<li><%= accepted_app.email %> </li>
-	    </ul>
-	    <center>
-		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewApplicationModal">
-		      View
-		    </button>
-		</center>
-	  </div>
-	</div>
-	<%= render "view_history", application: accepted_app %> 
+	<%= render "view_history", application: application %> 
 <% end %>

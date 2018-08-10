@@ -44,7 +44,7 @@
 
   <%= form_tag update_status_path(@application.id, session[:admin_id]) do %>
     <%= label_tag :rejection_reason %>
-    <%= text_area :rejection_reason, :size => "60x12" %><br><br>
+    <%= text_area_tag "rejection_reason", nil, size: "60x12" %><br><br>
     <%= button_tag 'Reject', type: 'submit', class: 'btn btn-danger', name: 'Reject' %>
     <%= button_tag 'Accept', type: 'submit', class: 'btn btn-success', name: 'Accept' %>
   <% end %>

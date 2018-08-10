@@ -10,6 +10,11 @@ class SubmissionController < ApplicationController
             else
                 ApplicationStatusMailer.application_reject(@application).deliver_later
                 @application.update(status: "Rejected")
+                @application.update(assigned_to: nil)
+            end
+
+            @application.attributes.each do |key, value|
+
             end
             historical_data = History.new(
                 'email': @application.email,
@@ -26,6 +31,7 @@ class SubmissionController < ApplicationController
             )
             
             historical_data.save
+            redirect_to admin_home_path(session[:admin_id])
         else
             raise ActionController::RoutingError.new('Not Found')
         end

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_08_09_150259) do
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assigned_to"
   end
 
   create_table "cities", force: :cascade do |t|
