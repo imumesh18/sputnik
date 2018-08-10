@@ -45,6 +45,6 @@
   <%= form_tag update_status_path(@application.id, session[:admin_id]) do %>
     <%= label_tag :rejection_reason %>
     <%= text_field_tag :rejection_reason %><br><br>
-    <%= button_tag 'Reject', type: 'submit', class: 'btn btn-danger', name: 'Reject' %>
-    <%= button_tag 'Accept', type: 'submit', class: 'btn btn-success', name: 'Accept' %>
+    <%= button_tag 'Reject', type: 'submit', class: 'btn btn-danger', name: 'Rejected' %>
+    <%= button_tag 'Accept', type: 'submit', class: 'btn btn-success', name: 'Accepted' %>
   <% end %>
