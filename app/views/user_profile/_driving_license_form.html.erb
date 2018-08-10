@@ -1,7 +1,7 @@
 <%= form_for @user_info, url: {action: "driving_license_submit"},multipart: true do |f| %>
 	<div class="field">
 		<%= f.label :driving_license %><br>
-	 	<%= f.file_field :driving_license %>
+	 	<%= f.file_field :driving_license ,:required => true%>
 	</div><br>
 	<div class="actions"><%= f.submit "Submit" %></div>
 <% end %>

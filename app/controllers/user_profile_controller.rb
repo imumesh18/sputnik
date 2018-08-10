@@ -32,8 +32,7 @@ class UserProfileController < ApplicationController
     end
 
     def driving_license_submit
-    	@user_info.update(allowed_params_driving_license)
-    	if @user_info.save
+    	if @user_info.update(allowed_params_driving_license)
     		flash[:success] = "Driving License Submitted"
     		redirect_to vehicle_registration_card_path(session[:user_id])
     	else
@@ -51,8 +50,7 @@ class UserProfileController < ApplicationController
     	@user_info.update(allowed_params_vehicle_registration_card)
     	if @user_info.save
     		flash[:success] = "Vehicle Registration Card Submitted"
-    		redirect_to vehicle_registration_card_path(session[:user_id])
-    		# redirect to next form
+    		redirect_to application_preview_path(session[:user_id])
     	else
       		display_errors
       		redirect_to vehicle_registration_card_path(session[:user_id])

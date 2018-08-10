@@ -41,6 +41,20 @@ RSpec.describe Admin, type: :model do
   	end
   end
 
+  describe "#encrypt_password" do
+    it "should not set salt and encrypted password on blank password" do
+      subject.password = ""
+      subject.encrypt_password
+      expect(subject.salt).to eq(nil)
+      expect(subject.encrypted_password).to eq(nil)
+    end
+    it "should set salt and encrypted password" do
+      subject.encrypt_password
+      expect(subject.salt).to_not eq(nil)
+      expect(subject.encrypted_password).to_not eq(nil)
+    end
+  end
+
   describe "#email_verified" do
   	it "should return email_verified" do
   		subject.is_verified = false
