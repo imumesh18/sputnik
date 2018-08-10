@@ -1,1 +1,22 @@
-<h2>Welcome</h2>
+<table border="1" cellpadding="10">
+	<thead>
+		<th>Application Status</th>
+		<th>Name</th>
+		<th>Date of birth</th>
+		<th>Gender</th>
+		<th>Mobile</th>
+		<% if application.rejection_reason %>
+			<th>Rejection Reason</th>
+		<% end %>
+	</thead>
+	<tr>
+		<td><%= application.status %></td>
+		<td><%= application.full_name %></td>
+		<td><%= application.dob %></td>
+		<td><%= application.gender %></td>
+		<td><%= application.mobile %></td>
+		<% if application.rejection_reason %>
+			<td><%= application.rejection_reason %></td>
+		<% end %>
+	</tr>
+</table>

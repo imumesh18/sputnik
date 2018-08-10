@@ -40,7 +40,7 @@
         <td>
         	
         	<% if @user_info.driving_license? %>
-				<%= image_tag(@user_info.driving_license.url, size: "600x300") %>
+				<%= image_tag(@user_info.driving_license.url, size: "300x300") %>
 			<% end %>
         </td>
       </tr> 
@@ -49,7 +49,7 @@
         <td>
         	
         	<% if @user_info.vehicle_registration_card? %>
-				<%= image_tag(@user_info.vehicle_registration_card.url, size: "600x300") %>
+				<%= image_tag(@user_info.vehicle_registration_card.url, size: "300x300") %>
 			<% end %>
         </td>
       </tr> 

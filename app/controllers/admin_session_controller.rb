@@ -1,6 +1,5 @@
 class AdminSessionController < ApplicationController
 	def login
-		p "login"
 		save_admin_login_state
 	end
 

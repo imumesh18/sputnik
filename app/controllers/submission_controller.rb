@@ -6,10 +6,13 @@ class SubmissionController < ApplicationController
             @application.update(rejection_reason: params[:rejection_reason])
             if params[:Accepted]
                 @application.update(status: "Accepted")
-                ApplicationStatusMailer.application_accept(@application).deliver_now
+                @application.update(assigned_to: nil)
+                ApplicationStatusMailer.application_accept(@application).deliver_later
+                flash[:success] = "Application Submitted"
             else
                 ApplicationStatusMailer.application_reject(@application).deliver_later
                 @application.update(status: "Rejected")
+                flash[:success] = "Application Rejected"
             end
             historical_data = History.new(
                 'email': @application.email,
@@ -24,8 +27,8 @@ class SubmissionController < ApplicationController
                 'rejection_reason': @application.rejection_reason,
                 'assigned_to': @application.assigned_to
             )
-            
             historical_data.save
+            redirect_to admin_home_path(params[:id])
         else
             raise ActionController::RoutingError.new('Not Found')
         end
