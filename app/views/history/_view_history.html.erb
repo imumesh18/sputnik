@@ -1,4 +1,4 @@
-<div class="modal fade" id="viewApplicationModal" tabindex="-1" role="dialog" aria-labelledby="viewApplicationModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewApplicationModal<%=application.id%>" tabindex="-1" role="dialog" aria-labelledby="viewApplicationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -33,20 +33,14 @@
               </tr> 
               <tr>
                 <td>Driving License</td>
-                <td>
-                  
-              <% if application.driving_license? %>
+                <td>                  
                 <%= image_tag(application.driving_license.url, size: "300x300") %>
-              <% end %>
                 </td>
               </tr> 
               <tr>
                 <td>Vehicle Registration Card</td>
                 <td>
-                  
-                  <% if application.vehicle_registration_card? %>
-                <%= image_tag(application.vehicle_registration_card.url, size: "300x300") %>
-              <% end %>
+                  <%= image_tag(application.vehicle_registration_card.url, size: "300x300") %>
                 </td>
               </tr> 
             </tbody>

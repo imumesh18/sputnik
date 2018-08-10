@@ -13,7 +13,9 @@ class SubmissionController < ApplicationController
                 ApplicationStatusMailer.application_reject(@application).deliver_later
                 @application.update(status: "Rejected")
                 flash[:success] = "Application Rejected"
+                @application.update(assigned_to: nil)
             end
+
             historical_data = History.new(
                 'email': @application.email,
                 'full_name': @application.full_name,
