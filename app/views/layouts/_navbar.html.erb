@@ -5,6 +5,7 @@
   		<%= link_to "Portal", basic_details_path(session[:user_id]) %>
  		<%= link_to "Log Out", logout_path %>
  	<% elsif session[:admin_id] %>
+ 		<%= link_to "History", history_preview_path(session[:admin_id]) %>
  		<%= link_to "Portal", admin_home_path(session[:admin_id]) %>
  		<%= link_to "Log Out", logout_path %>
 	<% else %>
