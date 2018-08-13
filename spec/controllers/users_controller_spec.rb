@@ -15,6 +15,13 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to redirect_to(signup_url)
         end
     end
+
+    describe "for new user" do
+        it "should return 200 response on show" do
+            get :signup
+            expect(response).to have_http_status(:success)
+        end
+    end
     
     describe "for verify" do
         it 'should verify token' do

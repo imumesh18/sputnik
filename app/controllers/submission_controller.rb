@@ -40,7 +40,7 @@ class SubmissionController < ApplicationController
     end
     def check_id
         if params[:id] != session[:admin_id].to_s
-        redirect_to admin_home_path(session[:admin_id])
+            redirect_to admin_home_path(session[:admin_id])
         end
     end
 end

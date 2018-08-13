@@ -121,4 +121,19 @@ RSpec.describe UserProfileController, type: :controller do
 	    expect(response).to redirect_to :action => :show, id:1
 	  end
 	end
+
+	describe "check_application_status" do
+	  it "redirects to user_profile_path when @user_info.status is Applied on GET show" do
+	  	user_info = {
+	  		'full_name':"Test",
+	  		"dob": "20/08/1996",
+	  		"mobile": 9896202113, 
+	  		"city": "Jakarata", 
+	  		"gender": "male"
+	  	}
+	    post :apply, params: {'id':1, 'user_info': user_info}
+	    get :application_preview, params: @GET_PARAMS
+	    expect(response).to redirect_to :action => :show, id:1
+	  end
+	end
 end

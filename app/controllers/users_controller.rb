@@ -50,15 +50,5 @@ class UsersController < ApplicationController
         end
         return token
       end
-
-      def display_errors
-        if @user.errors.any?
-          errors = []
-          @user.errors.full_messages.each do |message|
-            errors<< message
-          end
-          flash[:alert] = errors.join("\n")
-        end
-      end
 end
   
